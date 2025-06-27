@@ -1,0 +1,15 @@
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui:latest
+    environment:
+      VALIDATOR_URL: null
+    ports:
+      - "8081:8080"
+    volumes:
+      - type: bind
+        source: $PWD/docker/swagger/swagger-initializer.js
+        target: /usr/share/nginx/html/swagger-initializer.js
+      - type: bind
+        source: $PWD/docker/api/openapi.yaml
+        target: /usr/share/nginx/html/openapi.yaml
+    restart: always
