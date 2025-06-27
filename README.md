@@ -17,21 +17,35 @@ GOOS=linux GOARCH=amd64 CGO_ENABLED=0 GOCACHE=/tmp/.cache/ go build -ldflags="-s
 build/reference-api-mock-server ./docker/api/openapi.yaml
 ```
 
-
-
+### Build & Run
+```shell
+GOOS=linux GOARCH=amd64 CGO_ENABLED=0 GOCACHE=/tmp/.cache/ go build -ldflags="-s -w" -o build/reference-api-mock-server && \
+build/reference-api-mock-server ./docker/api/openapi.yaml
+```
 
 ## Swagger UI
 
+Links:
+* [Swagger UI](https://swagger.io/tools/swagger-ui/)
+* [Swagger UI GitHub](https://github.com/swagger-api/swagger-ui)
+
 ### Start
 ```shell
-docker compose up -d
+docker compose run --rm --service-ports swagger-ui
 ```
 
-### Use
-[Swagger UI](http://127.0.0.1:8081/)
+[Local Swagger UI](http://127.0.0.1:8081/)
 
-### Stop
+## RapiDoc
 
+Links:
+* [RapiDoc](https://rapidocweb.com/)  
+* [RapiDoc Examples](https://rapidocweb.com/list.html)
+* [RapiDoc GitHub](https://github.com/rapi-doc/RapiDoc)
+
+### Start
 ```shell
-docker compose down
+docker compose run --rm --service-ports rapidoc
 ```
+
+[Local RapiDoc](http://127.0.0.1:8082/)

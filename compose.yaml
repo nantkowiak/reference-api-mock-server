@@ -1,5 +1,7 @@
 services:
   swagger-ui:
+    profiles:
+      - explicit
     image: swaggerapi/swagger-ui:latest
     environment:
       VALIDATOR_URL: null
@@ -12,4 +14,18 @@ services:
       - type: bind
         source: $PWD/docker/api/openapi.yaml
         target: /usr/share/nginx/html/openapi.yaml
-    restart: always
+    restart: on-failure
+  rapidoc:
+    profiles:
+      - explicit
+    image: mrin9/rapidoc:latest
+    ports:
+      - "8082:80"
+    environment:
+      SPEC_URL: openapi.yaml
+      RAPIDOC_OPTIONS: "theme=dark render-style=view show-header=false show-info=false allow-server-selection=false allow-authentication=false"
+    volumes:
+      - type: bind
+        source: $PWD/docker/api/openapi.yaml
+        target: /usr/share/nginx/html/openapi.yaml
+    restart: on-failure
